@@ -589,7 +589,7 @@ body::after {
 
   <div class="contract" onclick="copyCA()">
     <span class="ca-label">CA</span>
-    <span id="ca-text">CAC1FjBy...pump</span>
+    <span id="ca-text">FUzxijwR...pump</span>
     <span class="copy-hint">click to copy</span>
   </div>
 
@@ -647,7 +647,7 @@ body::after {
 <div class="toast" id="toast">CONTRACT ADDRESS COPIED</div>
 
 <script>
-const CA = 'CAC1FjByxmtxTFBuTmUXnHYKr7tnTWWDzU7Kpump';
+const CA = 'FUzxijwRjoBRWKB5nfEoLWVUauWzrXqeRjngeFM6pump';
 let currency = 'USD';
 let solPrice = null;
 let mcapUSD = null;
@@ -677,7 +677,7 @@ async function fetchMarketData() {
     const solData = await solRes.json();
     solPrice = solData?.solana?.usd || null;
     try {
-      const dexRes = await fetch('https://api.dexscreener.com/latest/dex/tokens/CAC1FjByxmtxTFBuTmUXnHYKr7tnTWWDzU7Kpump');
+      const dexRes = await fetch('https://api.dexscreener.com/latest/dex/tokens/FUzxijwRjoBRWKB5nfEoLWVUauWzrXqeRjngeFM6pump');
       const dexData = await dexRes.json();
       const pair = dexData?.pairs?.[0];
       if (pair?.fdv) {
