@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>10000x</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --gold:       #c9a84c;
+  --gold-light: #f0d080;
+  --gold-pale:  #fff8e7;
+  --gold-deep:  #8b6914;
+  --gold-shine: #ffe566;
+  --black:      #06050a;
+  --black2:     #0e0c12;
+  --black3:     #161320;
+  --border:     rgba(201,168,76,0.25);
+  --border2:    rgba(201,168,76,0.5);
+  --muted:      rgba(201,168,76,0.45);
+}
+
+html,body {
+  background: var(--black);
+  color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 100% 50%, rgba(201,168,76,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 0% 80%, rgba(201,168,76,0.03) 0%, transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(201,168,76,0.012) 60px,
+      rgba(201,168,76,0.012) 62px
+    );
+  pointer-events:none;
+  z-index:0;
+  animation: rays 20s linear infinite;
+}
+@keyframes rays {
+  0%{background-position:0 0}
+  100%{background-position:200px 200px}
+}
+
+.wrap {
+  position:relative;
+  z-index:1;
+  max-width:580px;
+  margin:0 auto;
+  padding:48px 24px 80px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* COIN */
+.coin-wrap {
+  position:relative;
+  width:180px;
+  height:180px;
+  margin-bottom:20px;
+}
+
+.coin-glow {
+  position:absolute;
+  inset:-20px;
+  border-radius:50%;
+  background:radial-gradient(circle, transparent 40%, rgba(201,168,76,0.15) 70%, transparent 100%);
+  animation:glowpulse 3s ease-in-out infinite;
+}
+@keyframes glowpulse{
+  0%,100%{opacity:0.5;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.1)}
+}
+
+.coin {
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background: radial-gradient(circle at 35% 30%, #f5d878, #c9a84c 40%, #8b6914 75%, #5a4008);
+  border: 3px solid var(--gold);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,0.3),
+    0 0 40px rgba(201,168,76,0.4),
+    0 0 80px rgba(201,168,76,0.2),
+    inset 0 2px 4px rgba(255,255,255,0.2),
+    inset 0 -2px 4px rgba(0,0,0,0.4);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  animation: coinspin 6s ease-in-out infinite;
+  position:relative;
+  overflow:hidden;
+}
+
+.coin::before {
+  content:'';
+  position:absolute;
+  top:-30%;left:-30%;
+  width:60%;height:60%;
+  background:radial-gradient(circle, rgba(255,255,255,0.35) 0%, transparent 70%);
+  border-radius:50%;
+}
+
+.coin::after {
+  content:'';
+  position:absolute;
+  inset:6px;
+  border-radius:50%;
+  border:1px solid rgba(255,240,180,0.3);
+}
+
+@keyframes coinspin {
+  0%,100%{box-shadow:0 0 0 1px rgba(201,168,76,0.3),0 0 40px rgba(201,168,76,0.4),0 0 80px rgba(201,168,76,0.2),inset 0 2px 4px rgba(255,255,255,0.2),inset 0 -2px 4px rgba(0,0,0,0.4)}
+  50%{box-shadow:0 0 0 1px rgba(201,168,76,0.5),0 0 60px rgba(201,168,76,0.7),0 0 120px rgba(201,168,76,0.35),inset 0 2px 4px rgba(255,255,255,0.2),inset 0 -2px 4px rgba(0,0,0,0.4)}
+}
+
+.coin-arrow {
+  position:absolute;
+  top:28px;right:30px;
+  font-size:28px;
+  color:#fff8e0;
+  text-shadow:0 0 10px rgba(255,230,100,0.6);
+  transform:rotate(-30deg);
+  font-weight:900;
+  z-index:1;
+}
+
+.coin-text {
+  font-family:'Cinzel', serif;
+  font-weight:700;
+  font-size:36px;
+  color:#fff8e0;
+  text-shadow:0 2px 4px rgba(0,0,0,0.6), 0 0 20px rgba(255,220,100,0.4);
+  letter-spacing:-1px;
+  position:relative;
+  z-index:1;
+}
+
+/* TITLE */
+.title {
+  font-family:'Cinzel Decorative', serif;
+  font-size: clamp(52px,14vw,96px);
+  font-weight:700;
+  line-height:0.9;
+  letter-spacing:-1px;
+  background: linear-gradient(180deg, #fff8e0 0%, #f0d080 30%, #c9a84c 65%, #8b6914 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 20px rgba(201,168,76,0.4));
+  animation: goldshine 4s ease-in-out infinite;
+  text-align:center;
+  margin-bottom:6px;
+}
+@keyframes goldshine {
+  0%,100%{filter:drop-shadow(0 0 20px rgba(201,168,76,0.4))}
+  50%{filter:drop-shadow(0 0 40px rgba(201,168,76,0.8)) drop-shadow(0 0 80px rgba(201,168,76,0.3))}
+}
+
+.tagline {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:14px;
+  letter-spacing:3px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:32px;
+}
+
+/* ORNAMENT */
+.ornament {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  max-width:400px;
+  margin:12px auto 28px;
+}
+.ornament-line {
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+}
+.ornament-diamond {
+  width:6px;height:6px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  box-shadow:0 0 8px rgba(201,168,76,0.6);
+}
+
+/* CONTRACT */
+.contract {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(201,168,76,0.06);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:10px 18px;
+  margin-bottom:36px;
+  font-family:'Cormorant Garamond', serif;
+  font-size:13px;
+  letter-spacing:1px;
+  color:var(--muted);
+  cursor:pointer;
+  transition:all 0.3s;
+  width:100%;
+  max-width:420px;
+  justify-content:center;
+}
+.contract:hover {
+  border-color:var(--border2);
+  color:var(--gold-light);
+  background:rgba(201,168,76,0.1);
+  box-shadow:0 0 20px rgba(201,168,76,0.1);
+}
+.contract .ca-label {
+  color:var(--gold);
+  font-weight:600;
+  letter-spacing:2px;
+  font-size:11px;
+  text-transform:uppercase;
+  font-family:'Cinzel', serif;
+}
+.contract .copy-hint {
+  font-size:10px;
+  opacity:0.4;
+  margin-left:auto;
+  font-style:italic;
+}
+
+/* TICKER */
+.ticker-wrap {
+  width:100%;
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:9px 0;
+  margin-bottom:36px;
+  background:rgba(201,168,76,0.03);
+}
+.ticker-inner {
+  display:flex;
+  gap:48px;
+  animation:ticker 20s linear infinite;
+  white-space:nowrap;
+  width:max-content;
+}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item {
+  font-family:'Cinzel', serif;
+  font-size:10px;
+  letter-spacing:3px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.ticker-item span{color:var(--gold);margin-left:6px}
+
+/* CARD */
+.card {
+  width:100%;
+  background: linear-gradient(160deg, rgba(201,168,76,0.06) 0%, rgba(14,12,18,0.98) 50%);
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:36px 32px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before,.card::after {
+  content:'';
+  position:absolute;
+  width:24px;height:24px;
+}
+.card::before {
+  top:0;left:0;
+  border-top:2px solid var(--gold-deep);
+  border-left:2px solid var(--gold-deep);
+}
+.card::after {
+  bottom:0;right:0;
+  border-bottom:2px solid var(--gold-deep);
+  border-right:2px solid var(--gold-deep);
+}
+.card-corner-tr,.card-corner-bl{position:absolute;width:24px;height:24px;}
+.card-corner-tr{top:0;right:0;border-top:2px solid var(--gold-deep);border-right:2px solid var(--gold-deep);}
+.card-corner-bl{bottom:0;left:0;border-bottom:2px solid var(--gold-deep);border-left:2px solid var(--gold-deep);}
+
+.section-label {
+  font-family:'Cinzel', serif;
+  font-size:9px;
+  letter-spacing:4px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.live-dot {
+  width:5px;height:5px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 6px var(--gold);
+  animation:blink 2s ease-in-out infinite;
+  flex-shrink:0;
+}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 6px var(--gold)}50%{opacity:0.3;box-shadow:none}}
+
+.mcap-value {
+  font-family:'Cinzel', serif;
+  font-size:40px;
+  font-weight:600;
+  background: linear-gradient(180deg, #fff8e0, #c9a84c);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1;
+  margin-bottom:4px;
+}
+
+.mcap-ticker {
+  font-size:12px;
+  color:var(--muted);
+  font-style:italic;
+  letter-spacing:1px;
+  margin-bottom:28px;
+}
+
+.card-divider {
+  height:1px;
+  background: linear-gradient(90deg, transparent, var(--gold-deep), transparent);
+  margin:24px 0;
+}
+
+.input-label {
+  font-family:'Cinzel', serif;
+  font-size:9px;
+  letter-spacing:4px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.input-row {
+  display:flex;
+  border:1px solid var(--border);
+  border-radius:2px;
+  overflow:hidden;
+  transition:border-color 0.3s, box-shadow 0.3s;
+  background:rgba(0,0,0,0.4);
+}
+.input-row:focus-within {
+  border-color:var(--border2);
+  box-shadow:0 0 20px rgba(201,168,76,0.12), inset 0 0 20px rgba(201,168,76,0.03);
+}
+
+.currency-toggle{display:flex;}
+.cur-btn {
+  background:rgba(201,168,76,0.08);
+  border:none;
+  border-right:1px solid var(--border);
+  color:var(--muted);
+  font-family:'Cinzel', serif;
+  font-size:11px;
+  font-weight:600;
+  padding:0 16px;
+  cursor:pointer;
+  transition:all 0.2s;
+  letter-spacing:2px;
+}
+.cur-btn.active {
+  background:rgba(201,168,76,0.15);
+  color:var(--gold-light);
+}
+.cur-btn:hover:not(.active){color:var(--gold)}
+
+.amount-input {
+  flex:1;
+  background:transparent;
+  border:none;
+  color:var(--gold-light);
+  font-family:'Cinzel', serif;
+  font-size:22px;
+  font-weight:400;
+  padding:14px 18px;
+  outline:none;
+  width:100%;
+  min-width:0;
+}
+.amount-input::placeholder{color:rgba(201,168,76,0.2)}
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+.quick-amounts {
+  display:flex;
+  gap:6px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+.qa-btn {
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:2px;
+  color:var(--muted);
+  font-family:'Cinzel', serif;
+  font-size:10px;
+  letter-spacing:1px;
+  padding:5px 12px;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.qa-btn:hover {
+  border-color:var(--border2);
+  color:var(--gold);
+  background:rgba(201,168,76,0.08);
+  box-shadow:0 0 12px rgba(201,168,76,0.1);
+}
+
+.result-section {
+  margin-top:28px;
+  padding:28px 24px;
+  background:rgba(201,168,76,0.04);
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:2px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.result-section::before {
+  content:'✦';
+  position:absolute;
+  font-size:200px;
+  color:rgba(201,168,76,0.04);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  line-height:1;
+}
+
+.result-label {
+  font-family:'Cinzel', serif;
+  font-size:9px;
+  letter-spacing:4px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.result-value {
+  font-family:'Cinzel Decorative', serif;
+  font-size: clamp(38px,9vw,68px);
+  font-weight:700;
+  background: linear-gradient(180deg, #fff8e0 0%, #f0d080 35%, #c9a84c 70%, #8b6914 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1;
+  filter:drop-shadow(0 0 15px rgba(201,168,76,0.4));
+  transition:filter 0.3s;
+}
+.result-value.flash{animation:goldflash 0.5s ease;}
+@keyframes goldflash {
+  0%{filter:drop-shadow(0 0 40px rgba(255,230,100,0.9)) brightness(1.5)}
+  100%{filter:drop-shadow(0 0 15px rgba(201,168,76,0.4)) brightness(1)}
+}
+
+.result-alt {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:14px;
+  color:var(--muted);
+  margin-top:8px;
+  letter-spacing:1px;
+}
+
+.bottom-row {
+  display:flex;
+  justify-content:space-between;
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  gap:16px;
+}
+.bottom-item{flex:1;}
+.bottom-item:last-child{text-align:right}
+.bottom-label {
+  font-family:'Cinzel', serif;
+  font-size:8px;
+  letter-spacing:3px;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.bottom-value {
+  font-family:'Cormorant Garamond', serif;
+  font-size:16px;
+  color:var(--gold-light);
+  letter-spacing:1px;
+}
+.bottom-value.accent{color:var(--gold);font-weight:600;}
+
+.disclaimer {
+  margin-top:28px;
+  text-align:center;
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:2px;
+  opacity:0.6;
+}
+
+.toast {
+  position:fixed;
+  bottom:36px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background: linear-gradient(135deg, #c9a84c, #f0d080, #c9a84c);
+  color:#0a0800;
+  font-family:'Cinzel', serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:3px;
+  padding:12px 24px;
+  border-radius:2px;
+  opacity:0;
+  transition:all 0.35s ease;
+  pointer-events:none;
+  z-index:10000;
+  box-shadow:0 0 30px rgba(201,168,76,0.5);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media(max-width:480px){
+  .card{padding:24px 18px}
+  .result-section{padding:20px 16px}
+  .coin-wrap{width:140px;height:140px}
+  .coin{width:140px;height:140px}
+  .coin-text{font-size:28px}
+  .coin-arrow{font-size:22px;top:20px;right:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="coin-wrap">
+    <div class="coin-glow"></div>
+    <div class="coin">
+      <div class="coin-arrow">↗</div>
+      <div class="coin-text">10000x</div>
+    </div>
+  </div>
+
+  <div class="title">10000x</div>
+  <div class="tagline">not financial advice &nbsp;·&nbsp; just math</div>
+
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-line"></div>
+  </div>
+
+  <div class="contract" onclick="copyCA()">
+    <span class="ca-label">CA</span>
+    <span id="ca-text">CAC1FjBy...pump</span>
+    <span class="copy-hint">click to copy</span>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-inner" id="ticker"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-corner-tr"></div>
+    <div class="card-corner-bl"></div>
+
+    <div class="section-label"><span class="live-dot"></span>Live Market Cap</div>
+    <div class="mcap-value" id="mcap-display">—</div>
+    <div class="mcap-ticker" id="mcap-ticker">fetching market data...</div>
+
+    <div class="card-divider"></div>
+
+    <div class="input-label">Your invested amount</div>
+    <div class="input-row">
+      <div class="currency-toggle">
+        <button class="cur-btn active" id="btn-usd" onclick="setCurrency('USD')">USD</button>
+        <button class="cur-btn" id="btn-sol" onclick="setCurrency('SOL')">SOL</button>
+      </div>
+      <input class="amount-input" id="amount" type="number" placeholder="1,000" min="0" oninput="calculate()"/>
+    </div>
+    <div class="quick-amounts">
+      <button class="qa-btn" onclick="setAmount(100)">$100</button>
+      <button class="qa-btn" onclick="setAmount(500)">$500</button>
+      <button class="qa-btn" onclick="setAmount(1000)">$1K</button>
+      <button class="qa-btn" onclick="setAmount(5000)">$5K</button>
+      <button class="qa-btn" onclick="setAmount(10000)">$10K</button>
+    </div>
+
+    <div class="result-section">
+      <div class="result-label">Projected 10,000x Return</div>
+      <div class="result-value" id="result-value">$0</div>
+      <div class="result-alt" id="result-alt">enter an amount above</div>
+    </div>
+
+    <div class="bottom-row">
+      <div class="bottom-item">
+        <div class="bottom-label">Target Market Cap</div>
+        <div class="bottom-value" id="target-value">—</div>
+      </div>
+      <div class="bottom-item">
+        <div class="bottom-label">Multiplier</div>
+        <div class="bottom-value accent">10,000x</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer">past performance does not guarantee future results</div>
+</div>
+
+<div class="toast" id="toast">CONTRACT ADDRESS COPIED</div>
+
+<script>
+const CA = 'CAC1FjByxmtxTFBuTmUXnHYKr7tnTWWDzU7Kpump';
+let currency = 'USD';
+let solPrice = null;
+let mcapUSD = null;
+
+const msgs = [
+  ['10000X','serve it on a platter'],['WAGMI','white gloves only'],
+  ['GM','ser, your return awaits'],['10000X','with compliments'],
+  ['HOLD','the line, sir'],['10000X','presented at market open'],
+  ['BUTLER','approved'],['10000X','finest vintage'],
+  ['NGMI','if you panic sell'],['10000X','delivered first class'],
+  ['10000X','serve it on a platter'],['WAGMI','white gloves only'],
+  ['GM','ser, your return awaits'],['10000X','with compliments'],
+  ['HOLD','the line, sir'],['10000X','presented at market open'],
+  ['BUTLER','approved'],['10000X','finest vintage'],
+];
+const t = document.getElementById('ticker');
+msgs.forEach(([k,v])=>{
+  const el = document.createElement('span');
+  el.className = 'ticker-item';
+  el.innerHTML = `${k}<span>${v}</span>`;
+  t.appendChild(el);
+});
+
+async function fetchMarketData() {
+  try {
+    const solRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd');
+    const solData = await solRes.json();
+    solPrice = solData?.solana?.usd || null;
+    try {
+      const dexRes = await fetch('https://api.dexscreener.com/latest/dex/tokens/CAC1FjByxmtxTFBuTmUXnHYKr7tnTWWDzU7Kpump');
+      const dexData = await dexRes.json();
+      const pair = dexData?.pairs?.[0];
+      if (pair?.fdv) {
+        mcapUSD = pair.fdv;
+        const el = document.getElementById('mcap-display');
+        el.textContent = formatMcap(mcapUSD);
+        const ticker = document.getElementById('mcap-ticker');
+        ticker.textContent = pair.priceUsd ? '10000X  ·  $' + Number(pair.priceUsd).toFixed(8) : '10000X';
+      } else {
+        document.getElementById('mcap-display').textContent = '—';
+        document.getElementById('mcap-ticker').textContent = 'market cap unavailable';
+      }
+    } catch(e) {
+      document.getElementById('mcap-display').textContent = '—';
+      document.getElementById('mcap-ticker').textContent = 'market cap unavailable';
+    }
+    calculate();
+  } catch(e) {
+    document.getElementById('mcap-ticker').textContent = 'price feed offline';
+  }
+}
+
+function setCurrency(c) {
+  currency = c;
+  document.getElementById('btn-usd').classList.toggle('active', c==='USD');
+  document.getElementById('btn-sol').classList.toggle('active', c==='SOL');
+  const qas = document.querySelectorAll('.qa-btn');
+  const labels = c==='USD'
+    ? ['$100','$500','$1K','$5K','$10K']
+    : ['1 SOL','5 SOL','10 SOL','50 SOL','100 SOL'];
+  qas.forEach((b,i)=>b.textContent=labels[i]);
+  calculate();
+}
+
+function setAmount(n) {
+  document.getElementById('amount').value = n;
+  calculate();
+}
+
+function calculate() {
+  const rawAmt = parseFloat(document.getElementById('amount').value) || 0;
+  const usdAmt = (currency==='SOL' && solPrice) ? rawAmt * solPrice : rawAmt;
+  const resultEl = document.getElementById('result-value');
+  const altEl    = document.getElementById('result-alt');
+  const targetEl = document.getElementById('target-value');
+  const projected = usdAmt * 10000;
+
+  if (usdAmt <= 0) {
+    resultEl.textContent = '$0';
+    altEl.textContent = 'enter an amount above';
+    targetEl.textContent = '—';
+    return;
+  }
+
+  resultEl.textContent = formatMoney(projected);
+  resultEl.classList.remove('flash');
+  void resultEl.offsetWidth;
+  resultEl.classList.add('flash');
+
+  if (currency==='SOL' && solPrice) {
+    altEl.textContent = formatMoney(projected) + '  ·  ' + Math.round(projected/solPrice).toLocaleString() + ' SOL';
+  } else {
+    altEl.textContent = 'on a $' + usdAmt.toLocaleString() + ' position';
+  }
+
+  targetEl.textContent = mcapUSD ? formatMcap(mcapUSD * 10000) : '—';
+}
+
+function formatMoney(n) {
+  if (n >= 1e12) return '$' + (n/1e12).toFixed(2) + 'T';
+  if (n >= 1e9)  return '$' + (n/1e9).toFixed(2) + 'B';
+  if (n >= 1e6)  return '$' + (n/1e6).toFixed(2) + 'M';
+  if (n >= 1e3)  return '$' + Math.round(n).toLocaleString();
+  return '$' + n.toFixed(2);
+}
+
+function formatMcap(n) {
+  if (n >= 1e12) return '$' + (n/1e12).toFixed(1) + 'T';
+  if (n >= 1e9)  return '$' + (n/1e9).toFixed(1) + 'B';
+  if (n >= 1e6)  return '$' + (n/1e6).toFixed(1) + 'M';
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function copyCA() {
+  navigator.clipboard.writeText(CA).catch(()=>{});
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'), 2500);
+}
+
+document.getElementById('amount').value = '';
+fetchMarketData();
+setInterval(fetchMarketData, 30000);
+</script>
+</body>
+</html>
